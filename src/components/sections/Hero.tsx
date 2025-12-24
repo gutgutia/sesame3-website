@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Sparkles, ArrowRight, PlayCircle } from "lucide-react";
 import { Button } from "../ui/Button";
 
@@ -8,6 +8,25 @@ export function Hero() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+
+  // Focus input when navigated to via hash
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === "#waitlist" && emailInputRef.current) {
+        setTimeout(() => {
+          emailInputRef.current?.focus();
+        }, 500); // Wait for scroll to complete
+      }
+    };
+
+    // Check on mount
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,10 +70,11 @@ export function Hero() {
         </p>
 
         {/* Email Collection */}
-        <div id="waitlist" className="max-w-md mx-auto mb-6">
+        <div id="waitlist" className="max-w-md mx-auto mb-6 scroll-mt-28">
           {!submitted ? (
             <form onSubmit={handleSubmit} className="flex gap-3">
               <input
+                ref={emailInputRef}
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

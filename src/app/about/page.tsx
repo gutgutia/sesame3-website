@@ -74,11 +74,13 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-8">
               {/* Son */}
               <div className="bg-white border border-[var(--border)] rounded-2xl p-8 text-center">
-                <div className="w-20 h-20 bg-[var(--accent-surface)] rounded-full flex items-center justify-center mx-auto mb-5">
-                  <span className="text-3xl">👨‍💻</span>
-                </div>
+                <img 
+                  src="/images/vansh.png" 
+                  alt="Vansh Gutgutia" 
+                  className="w-24 h-24 rounded-full object-cover object-top mx-auto mb-5"
+                />
                 <h3 className="font-['Satoshi'] text-xl font-bold mb-1">
-                  [Son&apos;s Name]
+                  Vansh Gutgutia
                 </h3>
                 <p className="text-[var(--accent-primary)] font-medium text-sm mb-4">
                   Co-founder & Chief User
@@ -92,11 +94,13 @@ export default function AboutPage() {
 
               {/* Dad */}
               <div className="bg-white border border-[var(--border)] rounded-2xl p-8 text-center">
-                <div className="w-20 h-20 bg-[var(--accent-surface)] rounded-full flex items-center justify-center mx-auto mb-5">
-                  <span className="text-3xl">👨‍👦</span>
-                </div>
+                <img 
+                  src="/images/abhishek.jpg" 
+                  alt="Abhishek Gutgutia" 
+                  className="w-24 h-24 rounded-full object-cover object-top mx-auto mb-5"
+                />
                 <h3 className="font-['Satoshi'] text-xl font-bold mb-1">
-                  [Dad&apos;s Name]
+                  Abhishek Gutgutia
                 </h3>
                 <p className="text-[var(--accent-primary)] font-medium text-sm mb-4">
                   Co-founder & Chief Worrier
@@ -180,7 +184,7 @@ export default function AboutPage() {
                 Is that cheating? I prefer to call it <em>demonstrating product-market fit</em>.&quot;
               </p>
               <p className="text-sm text-[var(--text-muted)]">
-                — The student co-founder
+                — Vansh
               </p>
             </div>
           </div>

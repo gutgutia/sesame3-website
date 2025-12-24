@@ -6,13 +6,26 @@ import { ArrowRight, Mail } from "lucide-react";
 export function CTA() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      // TODO: Integrate with email collection service
-      console.log("Email submitted:", email);
-      setSubmitted(true);
+    if (!email) return;
+    
+    setLoading(true);
+    try {
+      const response = await fetch("https://formspree.io/f/mojazpwv", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,10 +60,11 @@ export function CTA() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-white text-[var(--text-main)] font-semibold rounded-full hover:bg-[var(--bg-secondary)] transition-all cursor-pointer"
+                  disabled={loading}
+                  className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-white text-[var(--text-main)] font-semibold rounded-full hover:bg-[var(--bg-secondary)] transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Join Waitlist
-                  <ArrowRight className="w-4 h-4" />
+                  {loading ? "Joining..." : "Join Waitlist"}
+                  {!loading && <ArrowRight className="w-4 h-4" />}
                 </button>
               </form>
             ) : (

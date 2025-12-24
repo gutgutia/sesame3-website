@@ -7,13 +7,26 @@ import { Button } from "../ui/Button";
 export function Hero() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      // TODO: Integrate with email collection service
-      console.log("Email submitted:", email);
-      setSubmitted(true);
+    if (!email) return;
+    
+    setLoading(true);
+    try {
+      const response = await fetch("https://formspree.io/f/mojazpwv", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,10 +64,11 @@ export function Hero() {
               />
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[var(--text-main)] text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer"
+                disabled={loading}
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[var(--text-main)] text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
-                Join Waitlist
-                <ArrowRight className="w-4 h-4" />
+                {loading ? "Joining..." : "Join Waitlist"}
+                {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
             </form>
           ) : (

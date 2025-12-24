@@ -13,9 +13,14 @@
       "type": "image/svg+xml"
     },
     {
-      "src": "/logo-mark.svg",
+      "src": "/assets/logo-mark-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo-mark-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }

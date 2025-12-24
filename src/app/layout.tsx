@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     siteName: "Sesame3",
     images: [
       {
-        url: "/og-image.svg",
+        url: "https://sesame3.com/assets/og-image.png",
         width: 1200,
         height: 630,
         alt: "Sesame3 - Your AI College Counselor",
@@ -26,13 +26,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sesame3 — Your AI College Counselor",
     description: "Get expert guidance, honest chance assessments, and a clear roadmap — all through a conversation with an AI that knows you.",
-    images: ["/og-image.svg"],
+    images: ["https://sesame3.com/assets/og-image.png"],
   },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/assets/favicon-32.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.svg",
+    apple: "/assets/apple-touch-icon-180.png",
   },
   manifest: "/site.webmanifest",
   themeColor: "#12756A",

@@ -1,61 +1,65 @@
-import { Check, X, Info } from "lucide-react";
+import { Check, Sparkles, Star, Award, Info } from "lucide-react";
 import { Button } from "../ui/Button";
 
 const plans = [
   {
-    name: "Free",
+    name: "Advisor",
+    tagline: "Solid guidance to get started",
     price: "$0",
     period: "forever",
-    description: "For students exploring their options",
+    description: "A helpful advisor who knows the basics and can point you in the right direction.",
+    experience: "Entry-level guidance",
     features: [
-      { text: "20 AI messages per week", included: true },
-      { text: "Profile building", included: true },
-      { text: "School discovery", included: true },
-      { text: "Up to 3 schools on your list", included: true },
-      { text: "Basic chances (Reach/Target/Safety)", included: true },
-      { text: "Basic roadmap & tasks", included: true },
-      { text: "Voice chat", included: false },
-      { text: "Essay review", included: false },
-      { text: "Shared access", included: false },
+      "General college planning advice",
+      "School discovery & exploration",
+      "Basic profile building",
+      "Reach / Target / Safety assessments",
+      "Standard response quality",
     ],
+    limit: "Generous monthly usage",
     cta: "Join Waitlist",
     ctaVariant: "secondary" as const,
+    icon: Sparkles,
   },
   {
-    name: "Premium",
-    price: "$19",
+    name: "Counselor",
+    tagline: "Experienced, personalized guidance",
+    price: "$9.99",
     period: "/month",
-    description: "For serious applicants ready to go all-in",
+    description: "A seasoned counselor who understands nuance and gives you tailored, strategic advice.",
+    experience: "Experienced guidance",
     badge: "Most Popular",
     featured: true,
     features: [
-      { text: "Unlimited AI messages", included: true, bold: true },
-      { text: "Profile building", included: true },
-      { text: "School discovery", included: true },
-      { text: "Unlimited schools on your list", included: true, bold: true },
-      { text: "Detailed chances with % breakdown", included: true, bold: true },
-      { text: "Smart roadmap with AI suggestions", included: true, bold: true },
-      { text: "Voice chat", included: true },
-      { text: "Essay review & feedback", included: true },
-      { text: "Share with parents & counselors", included: true },
+      "Everything in Advisor, plus:",
+      "More personalized recommendations",
+      "Nuanced essay feedback",
+      "Strategic application planning",
+      "Higher-quality responses",
     ],
+    limit: "Extended monthly usage",
     cta: "Join Waitlist",
     ctaVariant: "primary" as const,
-    annual: "Or $149/year (save 2 months)",
+    icon: Star,
   },
   {
-    name: "Senior Year Pass",
-    price: "$99",
-    period: "one-time",
-    description: "For 12th graders in crunch mode",
+    name: "Expert Counselor",
+    tagline: "Elite expertise for competitive applicants",
+    price: "$24.99",
+    period: "/month",
+    description: "A top-tier expert who's guided students into the most competitive schools in the country.",
+    experience: "Expert-level guidance",
     features: [
-      { text: "Everything in Premium", included: true },
-      { text: "Full access for senior year", included: true },
-      { text: "No monthly payments", included: true },
-      { text: "Application season covered", included: true },
+      "Everything in Counselor, plus:",
+      "Deep, nuanced insights",
+      "Sophisticated essay coaching",
+      "Competitive school strategy",
+      "Highest-quality responses",
     ],
+    limit: "Maximum monthly usage",
     cta: "Join Waitlist",
     ctaVariant: "secondary" as const,
+    icon: Award,
   },
 ];
 
@@ -64,97 +68,122 @@ export function Pricing() {
     <section id="pricing" className="py-24 bg-white border-t border-[var(--border)]">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-6">
           <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-primary)] mb-4">
             Planned Pricing
           </p>
           <h2 className="font-['Satoshi'] text-4xl font-bold mb-4">
-            Simple, transparent pricing
+            Choose your counselor
           </h2>
-          <p className="text-lg text-[var(--text-muted)]">
-            Here&apos;s what we&apos;re planning. Early waitlist members may get special perks.
+          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
+            Every plan gives you access to the same powerful features. 
+            The difference? The depth and quality of guidance you receive.
           </p>
+        </div>
+
+        {/* Value Proposition */}
+        <div className="flex justify-center gap-8 mb-14 text-sm text-[var(--text-muted)]">
+          <div className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-[var(--accent-primary)]" />
+            <span>Same features on all plans</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-[var(--accent-primary)]" />
+            <span>Cancel anytime</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-[var(--accent-primary)]" />
+            <span>No hidden fees</span>
+          </div>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto">
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className={`rounded-3xl p-8 flex flex-col relative ${
-                plan.featured
-                  ? "bg-[var(--text-main)] text-white scale-105 shadow-xl"
-                  : "bg-[var(--bg-secondary)]"
-              }`}
-            >
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide">
-                  {plan.badge}
-                </div>
-              )}
-
-              {/* Header */}
-              <div className="text-center pb-6 border-b border-black/10 mb-6">
-                {plan.featured && <div className="border-white/20" />}
-                <h3 className="font-['Satoshi'] text-xl font-bold mb-3">
-                  {plan.name}
-                </h3>
-                <div className="flex items-baseline justify-center gap-1 mb-2">
-                  <span className="font-['Satoshi'] text-5xl font-black">
-                    {plan.price}
-                  </span>
-                  <span className={plan.featured ? "text-white/70" : "text-[var(--text-muted)]"}>
-                    {plan.period}
-                  </span>
-                </div>
-                <p className={plan.featured ? "text-white/70 text-sm" : "text-[var(--text-muted)] text-sm"}>
-                  {plan.description}
-                </p>
-              </div>
-
-              {/* Features */}
-              <ul className="flex-1 space-y-3 mb-6">
-                {plan.features.map((feature, j) => (
-                  <li
-                    key={j}
-                    className={`flex items-start gap-3 text-sm ${
-                      !feature.included ? (plan.featured ? "text-white/40" : "text-[var(--text-light)]") : ""
-                    }`}
-                  >
-                    {feature.included ? (
-                      <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.featured ? "text-green-400" : "text-[var(--accent-primary)]"}`} />
-                    ) : (
-                      <X className="w-4 h-4 flex-shrink-0 mt-0.5 text-[var(--text-light)]" />
-                    )}
-                    <span className={"bold" in feature && feature.bold ? "font-semibold" : ""}>
-                      {feature.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
-              <Button
-                variant={plan.featured ? "white" : plan.ctaVariant}
-                href="#waitlist"
-                className="w-full"
+          {plans.map((plan, i) => {
+            const Icon = plan.icon;
+            return (
+              <div
+                key={i}
+                className={`rounded-3xl p-8 flex flex-col relative ${
+                  plan.featured
+                    ? "bg-[var(--text-main)] text-white scale-105 shadow-xl"
+                    : "bg-[var(--bg-secondary)]"
+                }`}
               >
-                {plan.cta}
-              </Button>
+                {plan.badge && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide">
+                    {plan.badge}
+                  </div>
+                )}
 
-              {plan.annual && (
-                <p className="text-center text-xs text-white/60 mt-3">
-                  {plan.annual}
+                {/* Icon & Name */}
+                <div className="text-center mb-6">
+                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 ${
+                    plan.featured 
+                      ? "bg-white/10" 
+                      : "bg-[var(--accent-surface)]"
+                  }`}>
+                    <Icon className={`w-7 h-7 ${plan.featured ? "text-white" : "text-[var(--accent-primary)]"}`} />
+                  </div>
+                  <h3 className="font-['Satoshi'] text-xl font-bold mb-1">
+                    {plan.name}
+                  </h3>
+                  <p className={`text-sm ${plan.featured ? "text-white/70" : "text-[var(--accent-primary)]"} font-medium`}>
+                    {plan.tagline}
+                  </p>
+                </div>
+
+                {/* Price */}
+                <div className="text-center pb-6 border-b border-black/10 mb-6">
+                  {plan.featured && <div className="border-white/20" />}
+                  <div className="flex items-baseline justify-center gap-1 mb-3">
+                    <span className="font-['Satoshi'] text-5xl font-black">
+                      {plan.price}
+                    </span>
+                    <span className={plan.featured ? "text-white/70" : "text-[var(--text-muted)]"}>
+                      {plan.period}
+                    </span>
+                  </div>
+                  <p className={`text-sm leading-relaxed ${plan.featured ? "text-white/70" : "text-[var(--text-muted)]"}`}>
+                    {plan.description}
+                  </p>
+                </div>
+
+                {/* Features */}
+                <ul className="flex-1 space-y-3 mb-6">
+                  {plan.features.map((feature, j) => (
+                    <li
+                      key={j}
+                      className="flex items-start gap-3 text-sm"
+                    >
+                      <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.featured ? "text-green-400" : "text-[var(--accent-primary)]"}`} />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Usage Note */}
+                <p className={`text-xs text-center mb-4 ${plan.featured ? "text-white/50" : "text-[var(--text-light)]"}`}>
+                  {plan.limit}
                 </p>
-              )}
-            </div>
-          ))}
+
+                {/* CTA */}
+                <Button
+                  variant={plan.featured ? "white" : plan.ctaVariant}
+                  href="#waitlist"
+                  className="w-full"
+                >
+                  {plan.cta}
+                </Button>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Note */}
+        {/* Bottom Note */}
         <div className="flex items-center justify-center gap-2 text-[var(--text-muted)] text-sm">
           <Info className="w-4 h-4 text-[var(--accent-primary)]" />
-          <p>Join the waitlist to be notified when we launch. Early members may get exclusive perks.</p>
+          <p>Join the waitlist for early access. Early members may get exclusive perks.</p>
         </div>
       </div>
     </section>

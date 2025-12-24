@@ -5,8 +5,8 @@ import { Logo } from "../ui/Logo";
 
 export function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 py-5 bg-[var(--bg-page)]/85 backdrop-blur-md border-b border-black/5">
-      <div className="container flex justify-between items-center">
+    <nav className="fixed top-0 left-0 right-0 z-50 py-4 md:py-5 bg-[var(--bg-page)]/85 backdrop-blur-md border-b border-black/5">
+      <div className="container flex justify-between items-center px-4">
         <a href="/">
           <Logo size="md" />
         </a>

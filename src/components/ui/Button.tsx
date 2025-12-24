@@ -18,7 +18,7 @@ export function Button({
   className,
   onClick 
 }: ButtonProps) {
-  const baseStyles = "inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all cursor-pointer";
+  const baseStyles = "inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all cursor-pointer appearance-none";
   
   const variants = {
     primary: "bg-[var(--text-main)] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5",

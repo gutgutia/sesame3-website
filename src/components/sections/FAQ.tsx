@@ -31,26 +31,26 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section className="py-24 bg-[var(--bg-secondary)]">
-      <div className="container">
+    <section className="py-16 md:py-24 bg-[var(--bg-secondary)]">
+      <div className="container px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-primary)] mb-4">
             Questions
           </p>
-          <h2 className="font-['Satoshi'] text-4xl font-bold">
+          <h2 className="font-['Satoshi'] text-3xl md:text-4xl font-bold">
             Frequently asked
           </h2>
         </div>
 
         {/* FAQ Grid */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
           {faqs.map((faq, i) => (
-            <div key={i} className="bg-white rounded-2xl p-7">
-              <h3 className="font-['Satoshi'] text-lg font-bold mb-3">
+            <div key={i} className="bg-white rounded-2xl p-5 md:p-7">
+              <h3 className="font-['Satoshi'] text-base md:text-lg font-bold mb-2 md:mb-3">
                 {faq.question}
               </h3>
-              <p className="text-[var(--text-muted)] leading-relaxed">
+              <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
                 {faq.answer}
               </p>
             </div>

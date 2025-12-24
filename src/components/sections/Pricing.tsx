@@ -65,27 +65,27 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-24 bg-white border-t border-[var(--border)]">
+    <section id="pricing" className="py-16 md:py-24 bg-white border-t border-[var(--border)]">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-6 px-4">
           <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-primary)] mb-4">
             Planned Pricing
           </p>
-          <h2 className="font-['Satoshi'] text-4xl font-bold mb-4">
+          <h2 className="font-['Satoshi'] text-3xl md:text-4xl font-bold mb-4">
             Choose your counselor
           </h2>
-          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
             Every plan gives you access to the same powerful features. 
             The difference? The depth and quality of guidance you receive.
           </p>
         </div>
 
         {/* Value Proposition */}
-        <div className="flex justify-center gap-8 mb-14 text-sm text-[var(--text-muted)]">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-14 text-sm text-[var(--text-muted)] px-4">
           <div className="flex items-center gap-2">
             <Check className="w-4 h-4 text-[var(--accent-primary)]" />
-            <span>Same features on all plans</span>
+            <span>Same features</span>
           </div>
           <div className="flex items-center gap-2">
             <Check className="w-4 h-4 text-[var(--accent-primary)]" />
@@ -98,15 +98,15 @@ export function Pricing() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto px-4 md:px-0">
           {plans.map((plan, i) => {
             const Icon = plan.icon;
             return (
               <div
                 key={i}
-                className={`rounded-3xl p-8 flex flex-col relative ${
+                className={`rounded-3xl p-6 md:p-8 flex flex-col relative ${
                   plan.featured
-                    ? "bg-[var(--text-main)] text-white scale-105 shadow-xl"
+                    ? "bg-[var(--text-main)] text-white md:scale-105 shadow-xl order-first md:order-none"
                     : "bg-[var(--bg-secondary)]"
                 }`}
               >
@@ -181,9 +181,9 @@ export function Pricing() {
         </div>
 
         {/* Bottom Note */}
-        <div className="flex items-center justify-center gap-2 text-[var(--text-muted)] text-sm">
-          <Info className="w-4 h-4 text-[var(--accent-primary)]" />
-          <p>Join the waitlist for early access. Early members may get exclusive perks.</p>
+        <div className="flex items-center justify-center gap-2 text-[var(--text-muted)] text-sm text-center px-4">
+          <Info className="w-4 h-4 text-[var(--accent-primary)] flex-shrink-0" />
+          <p>Join the waitlist for early access.</p>
         </div>
       </div>
     </section>

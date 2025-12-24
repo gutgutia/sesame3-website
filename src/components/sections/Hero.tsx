@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Sparkles, ArrowRight, PlayCircle } from "lucide-react";
-import { Button } from "../ui/Button";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export function Hero() {
   const [email, setEmail] = useState("");
@@ -50,29 +49,29 @@ export function Hero() {
   };
 
   return (
-    <header className="pt-40 pb-24 text-center">
-      <div className="container">
+    <header className="pt-28 md:pt-40 pb-16 md:pb-24 text-center">
+      <div className="container px-4">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--accent-surface)] border border-[var(--accent-border)] rounded-full text-sm font-semibold text-[var(--accent-primary)] mb-7">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--accent-surface)] border border-[var(--accent-border)] rounded-full text-sm font-semibold text-[var(--accent-primary)] mb-6 md:mb-7">
           <Sparkles className="w-3.5 h-3.5" />
           Coming Soon
         </div>
 
         {/* Title */}
-        <h1 className="font-['Satoshi'] text-5xl md:text-6xl font-black mb-6 max-w-3xl mx-auto">
+        <h1 className="font-['Satoshi'] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-5 md:mb-6 max-w-3xl mx-auto leading-tight">
           Your personal advisor for the{" "}
           <span className="text-[var(--accent-primary)]">college journey</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xl text-[var(--text-muted)] max-w-xl mx-auto mb-10 leading-relaxed">
+        <p className="text-base md:text-xl text-[var(--text-muted)] max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed">
           Expert guidance, honest chance assessments, and a clear roadmap — all through a conversation with an AI that knows you.
         </p>
 
         {/* Email Collection */}
         <div id="waitlist" className="max-w-md mx-auto mb-6 scroll-mt-28">
           {!submitted ? (
-            <form onSubmit={handleSubmit} className="flex gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
               <input
                 ref={emailInputRef}
                 type="email"
@@ -80,12 +79,12 @@ export function Hero() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-5 py-3.5 rounded-full border border-[var(--border)] bg-white text-[var(--text-main)] placeholder:text-[var(--text-light)] focus:outline-none focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 transition-all"
+                className="flex-1 px-5 py-3.5 rounded-full border border-[var(--border)] bg-white text-[var(--text-main)] placeholder:text-[var(--text-light)] focus:outline-none focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 transition-all text-center sm:text-left"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[var(--text-main)] text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[var(--text-main)] text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 whitespace-nowrap"
               >
                 {loading ? "Joining..." : "Join Waitlist"}
                 {!loading && <ArrowRight className="w-4 h-4" />}
@@ -98,76 +97,27 @@ export function Hero() {
           )}
         </div>
 
-        <div className="flex justify-center gap-4 mb-16">
-          <p className="text-sm text-[var(--text-light)]">
-            Be the first to know when we launch. No spam, ever.
-          </p>
-        </div>
+        <p className="text-sm text-[var(--text-light)] mb-12 md:mb-16">
+          Be the first to know when we launch. No spam, ever.
+        </p>
 
-        {/* Screenshot - Responsive container */}
-        <div className="hero-screenshot-wrapper max-w-[1000px] mx-auto">
+        {/* Screenshot */}
+        <div className="max-w-[1000px] mx-auto">
           <div 
-            className="hero-screenshot-container rounded-2xl overflow-hidden bg-white"
+            className="rounded-2xl overflow-hidden bg-white"
             style={{
               boxShadow: "0 40px 100px -30px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.04)"
             }}
           >
-            <div className="hero-screenshot-inner w-[1000px] h-[620px] origin-top-left">
-              <iframe 
-                src="/screenshots/hero-screenshot.html" 
-                className="w-[1000px] h-[620px] border-none pointer-events-none"
-                loading="lazy"
-                scrolling="no"
-              />
-            </div>
+            <img 
+              src="/assets/hero-screenshot.png" 
+              alt="Sesame3 app interface showing college counseling chat"
+              className="w-full h-auto"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
-
-      {/* Responsive scaling */}
-      <style jsx>{`
-        .hero-screenshot-wrapper {
-          position: relative;
-        }
-        .hero-screenshot-container {
-          position: relative;
-        }
-        .hero-screenshot-inner {
-          transform: scale(1);
-        }
-        @media (max-width: 1048px) {
-          .hero-screenshot-wrapper {
-            height: calc(620px * 0.85);
-          }
-          .hero-screenshot-inner {
-            transform: scale(0.85);
-          }
-        }
-        @media (max-width: 850px) {
-          .hero-screenshot-wrapper {
-            height: calc(620px * 0.72);
-          }
-          .hero-screenshot-inner {
-            transform: scale(0.72);
-          }
-        }
-        @media (max-width: 650px) {
-          .hero-screenshot-wrapper {
-            height: calc(620px * 0.55);
-          }
-          .hero-screenshot-inner {
-            transform: scale(0.55);
-          }
-        }
-        @media (max-width: 520px) {
-          .hero-screenshot-wrapper {
-            height: calc(620px * 0.42);
-          }
-          .hero-screenshot-inner {
-            transform: scale(0.42);
-          }
-        }
-      `}</style>
     </header>
   );
 }

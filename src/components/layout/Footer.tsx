@@ -2,8 +2,8 @@ import { Logo } from "../ui/Logo";
 
 export function Footer() {
   return (
-    <footer className="py-16 border-t border-[var(--border)]">
-      <div className="container flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="py-12 md:py-16 border-t border-[var(--border)]">
+      <div className="container flex flex-col md:flex-row justify-between items-center gap-6 px-4">
         <a href="/">
           <Logo size="sm" />
         </a>

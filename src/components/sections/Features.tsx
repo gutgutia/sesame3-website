@@ -10,7 +10,7 @@ const features = [
       "Voice and text — chat however you're comfortable",
       "Available 24/7, infinitely patient",
     ],
-    screenshot: "/screenshots/feature-advisor.html",
+    screenshot: "/assets/feature-advisor.png",
   },
   {
     icon: Target,
@@ -21,7 +21,7 @@ const features = [
       "Clear reach, target, and safety tiers",
       "Personalized recommendations to close gaps",
     ],
-    screenshot: "/screenshots/feature-chances.html",
+    screenshot: "/assets/feature-chances.png",
     reverse: true,
   },
   {
@@ -33,7 +33,7 @@ const features = [
       "AI-suggested schools based on your fit",
       "Application status tracking",
     ],
-    screenshot: "/screenshots/feature-schools.html",
+    screenshot: "/assets/feature-schools.png",
   },
   {
     icon: Map,
@@ -44,37 +44,34 @@ const features = [
       "Daily focus: just tackle the next thing",
       "AI tips to help you move faster",
     ],
-    screenshot: "/screenshots/feature-roadmap.html",
+    screenshot: "/assets/feature-roadmap.png",
     reverse: true,
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-[var(--bg-page)]">
+    <section id="features" className="py-16 md:py-24 bg-[var(--bg-page)]">
       <div className="container">
         {features.map((feature, i) => (
           <div
             key={i}
-            className={`grid md:grid-cols-2 gap-16 items-center mb-24 last:mb-0 ${
-              feature.reverse ? "md:direction-rtl" : ""
-            }`}
-            style={{ direction: feature.reverse ? "rtl" : "ltr" }}
+            className={`flex flex-col ${feature.reverse ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-16 items-center mb-16 md:mb-24 last:mb-0`}
           >
             {/* Content */}
-            <div className="max-w-lg" style={{ direction: "ltr" }}>
+            <div className="flex-1 max-w-lg px-4 md:px-0">
               <div className="w-12 h-12 bg-[var(--accent-surface)] rounded-xl flex items-center justify-center text-[var(--accent-primary)] mb-6">
                 <feature.icon className="w-6 h-6" />
               </div>
-              <h2 className="font-['Satoshi'] text-4xl font-bold mb-4">
+              <h2 className="font-['Satoshi'] text-3xl md:text-4xl font-bold mb-4">
                 {feature.title}
               </h2>
-              <p className="text-lg text-[var(--text-muted)] leading-relaxed mb-6">
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-6">
                 {feature.description}
               </p>
               <ul className="space-y-3">
                 {feature.points.map((point, j) => (
-                  <li key={j} className="flex items-start gap-3 text-[var(--text-muted)]">
+                  <li key={j} className="flex items-start gap-3 text-[var(--text-muted)] text-sm md:text-base">
                     <Check className="w-5 h-5 text-[var(--accent-primary)] flex-shrink-0 mt-0.5" />
                     {point}
                   </li>
@@ -83,19 +80,20 @@ export function Features() {
             </div>
 
             {/* Screenshot */}
-            <div 
-              className="rounded-2xl overflow-hidden shadow-lg bg-white"
-              style={{ 
-                direction: "ltr",
-                boxShadow: "0 30px 80px -20px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04)"
-              }}
-            >
-              <iframe
-                src={feature.screenshot}
-                className="w-full h-[620px] border-none pointer-events-none"
-                loading="lazy"
-                scrolling="no"
-              />
+            <div className="flex-1 w-full max-w-md md:max-w-none px-4 md:px-0">
+              <div 
+                className="rounded-2xl overflow-hidden bg-white"
+                style={{ 
+                  boxShadow: "0 30px 80px -20px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04)"
+                }}
+              >
+                <img
+                  src={feature.screenshot}
+                  alt={feature.title}
+                  className="w-full h-auto"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         ))}

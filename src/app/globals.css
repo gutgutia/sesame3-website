@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* ============================================
+   SESAME3 LIGHT THEME DESIGN TOKENS
+============================================ */
+:root {
+  /* Background Colors */
+  --bg-page: #FDFCF9;
+  --bg-surface: #FFFFFF;
+  --bg-secondary: #F7F5F0;
+  
+  /* Accent Colors */
+  --accent-primary: #12756A;
+  --accent-hover: #0F6158;
+  --accent-surface: #E8F5F3;
+  --accent-border: #C5E4DF;
+  
+  /* Text Colors */
+  --text-main: #2D2A26;
+  --text-muted: #6B665E;
+  --text-light: #9E988E;
+  
+  /* Border */
+  --border: #E8E5DF;
+  
+  /* Semantic */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #DC2626;
+  
+  /* Layout */
+  --container-width: 1140px;
+}
+
+@theme inline {
+  --color-bg-page: var(--bg-page);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-secondary: var(--bg-secondary);
+  
+  --color-accent: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-surface: var(--accent-surface);
+  --color-accent-border: var(--accent-border);
+  
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-text-light: var(--text-light);
+  
+  --color-border: var(--border);
+  
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Section base */
+.section {
+  padding: 100px 0;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-surface);
+  color: var(--text-main);
+}

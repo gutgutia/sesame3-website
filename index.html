@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesame3 — Your AI College Counselor</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-page: #FDFCF9;
+      --bg-surface: #FFFFFF;
+      --bg-secondary: #F7F5F0;
+      --accent-primary: #12756A;
+      --accent-hover: #0F6158;
+      --accent-surface: #E8F5F3;
+      --accent-border: #C5E4DF;
+      --text-main: #2D2A26;
+      --text-muted: #6B665E;
+      --text-light: #9E988E;
+      --border: #E8E5DF;
+      --container-width: 1140px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* === Typography === */
+    h1, h2, h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    /* === Buttons === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--text-main);
+      color: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .btn-secondary {
+      background: white;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-secondary);
+    }
+    .btn i { width: 18px; height: 18px; }
+
+    /* === Navbar === */
+    .navbar {
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(253, 252, 249, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--accent-primary);
+      color: white;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-main); }
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-cta .btn { padding: 10px 20px; font-size: 14px; }
+
+    /* === Hero === */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--accent-surface);
+      border: 1px solid var(--accent-border);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 28px;
+    }
+    .hero-badge i { width: 14px; height: 14px; }
+    .hero-title {
+      font-size: 64px;
+      font-weight: 900;
+      margin-bottom: 24px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-title .highlight {
+      color: var(--accent-primary);
+      position: relative;
+    }
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 72px;
+    }
+
+    /* Hero Screenshot */
+    .hero-screenshot {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      height: 620px;
+    }
+    .hero-screenshot-inner {
+      width: 1000px;
+      height: 620px;
+      transform-origin: top left;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 
+        0 40px 100px -30px rgba(0,0,0,0.2),
+        0 0 0 1px rgba(0,0,0,0.04);
+      background: var(--bg-surface);
+    }
+    .hero-screenshot iframe {
+      width: 1000px;
+      height: 620px;
+      border: none;
+      display: block;
+      pointer-events: none;
+    }
+    /* Breakpoint: 900px → scale 0.85 */
+    @media (max-width: 950px) {
+      .hero-screenshot { height: 527px; }
+      .hero-screenshot-inner { transform: scale(0.85); }
+    }
+    /* Breakpoint: 768px → scale 0.72 */
+    @media (max-width: 800px) {
+      .hero-screenshot { height: 446px; }
+      .hero-screenshot-inner { transform: scale(0.72); }
+    }
+    /* Breakpoint: 600px → scale 0.55 */
+    @media (max-width: 620px) {
+      .hero-screenshot { height: 341px; }
+      .hero-screenshot-inner { transform: scale(0.55); }
+    }
+    /* Breakpoint: 480px → scale 0.43 */
+    @media (max-width: 500px) {
+      .hero-screenshot { height: 267px; }
+      .hero-screenshot-inner { transform: scale(0.43); }
+    }
+    /* Breakpoint: 375px → scale 0.33 */
+    @media (max-width: 400px) {
+      .hero-screenshot { height: 205px; }
+      .hero-screenshot-inner { transform: scale(0.33); }
+    }
+
+    /* === How It Works === */
+    .how-section {
+      padding: 120px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-primary);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 44px;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-number {
+      width: 56px; height: 56px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-primary);
+      margin: 0 auto 24px;
+    }
+    .step-title {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .step-connector {
+      position: absolute;
+      top: 28px;
+      left: calc(50% + 48px);
+      width: calc(100% - 96px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--border) 0%, var(--border) 50%, transparent 50%);
+      background-size: 12px 2px;
+    }
+    .step:last-child .step-connector { display: none; }
+
+    /* === Features === */
+    .features-section {
+      padding: 120px 0;
+      background: var(--bg-page);
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 120px;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+
+    .feature-content {
+      max-width: 480px;
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: var(--accent-surface);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-primary);
+      margin-bottom: 24px;
+    }
+    .feature-icon i { width: 24px; height: 24px; }
+    .feature-title {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .feature-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .feature-list {
+      list-style: none;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+    .feature-list li i {
+      width: 20px; height: 20px;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-visual {
+      border-radius: 20px;
+      box-shadow: 
+        0 30px 80px -20px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(0,0,0,0.04);
+      overflow: hidden;
+      background: white;
+    }
+    .feature-visual iframe {
+      width: 100%;
+      height: 620px;
+      border: none;
+      display: block;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* === Problem Section === */
+    .problem-section {
+      padding: 100px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+    .problem-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .stat-item {
+      padding: 24px;
+    }
+    .stat-number {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .stat-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .problem-quote {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px;
+      background: var(--bg-secondary);
+      border-radius: 20px;
+    }
+    .problem-quote p {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .quote-author {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .quote-author strong {
+      color: var(--text-main);
+    }
+
+    /* === Trust Section === */
+    .trust-section {
+      padding: 60px 0;
+      background: var(--accent-surface);
+      border-top: 1px solid var(--accent-border);
+      border-bottom: 1px solid var(--accent-border);
+    }
+    .trust-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .trust-icon {
+      width: 56px; height: 56px;
+      background: var(--accent-primary);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .trust-icon i { width: 28px; height: 28px; }
+    .trust-text h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 6px;
+    }
+    .trust-text p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .problem-stats {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .trust-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* === Audience Section === */
+    .audience-section {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+    }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .audience-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .audience-emoji {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .audience-card h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .audience-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    @media (max-width: 800px) {
+      .audience-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === Timeline Section === */
+    .timeline-section {
+      padding: 100px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+    .grade-timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .grade-item {
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+    }
+    .grade-badge {
+      display: inline-block;
+      background: var(--text-main);
+      color: white;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .grade-item h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .grade-item p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .grade-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .grade-tag.ideal { background: var(--accent-surface); color: var(--accent-primary); }
+    .grade-tag.peak { background: #FEF3C7; color: #D97706; }
+    .grade-tag.crunch { background: #FEE2E2; color: #DC2626; }
+    @media (max-width: 800px) {
+      .grade-timeline { grid-template-columns: 1fr; }
+    }
+
+    /* === Comparison Section === */
+    .comparison-section {
+      padding: 100px 0;
+      background: var(--bg-page);
+    }
+    .comparison-table {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .comparison-header, .comparison-row {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+    }
+    .comparison-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-cell {
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .comparison-header .comparison-cell {
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 15px;
+    }
+    .comparison-cell.label {
+      justify-content: flex-start;
+      font-weight: 500;
+      color: var(--text-main);
+      background: var(--bg-secondary);
+    }
+    .comparison-cell.highlight {
+      background: var(--accent-surface);
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+    .comparison-cell.empty {
+      background: var(--bg-secondary);
+    }
+    .comparison-row {
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+    .icon-yes { color: var(--accent-primary); width: 20px; height: 20px; }
+    .icon-no { color: #DC2626; width: 20px; height: 20px; }
+    @media (max-width: 700px) {
+      .comparison-header, .comparison-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .comparison-cell:nth-child(2),
+      .comparison-cell:nth-child(3) {
+        display: none;
+      }
+    }
+
+    /* === Included Section === */
+    .included-section {
+      padding: 80px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .included-item {
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+    }
+    .included-icon {
+      width: 48px; height: 48px;
+      background: var(--accent-surface);
+      color: var(--accent-primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .included-icon i { width: 24px; height: 24px; }
+    .included-label {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .included-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    @media (max-width: 700px) {
+      .included-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* === FAQ Section === */
+    .faq-section {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .faq-item h3 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+    .faq-item p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    @media (max-width: 700px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === Pricing Section === */
+    .pricing-section {
+      padding: 100px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .pricing-card {
+      background: var(--bg-secondary);
+      border-radius: 24px;
+      padding: 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .pricing-card.featured {
+      background: var(--text-main);
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-primary);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pricing-header {
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 24px;
+    }
+    .pricing-card.featured .pricing-header {
+      border-bottom-color: rgba(255,255,255,0.2);
+    }
+    .pricing-name {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .price-amount {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .price-period {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    .pricing-card.featured .price-period {
+      color: rgba(255,255,255,0.7);
+    }
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .pricing-card.featured .pricing-desc {
+      color: rgba(255,255,255,0.7);
+    }
+    .pricing-features {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+    .pricing-card.featured .pricing-features li {
+      color: white;
+    }
+    .pricing-features li i {
+      width: 18px;
+      height: 18px;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pricing-card.featured .pricing-features li i {
+      color: #4ADE80;
+    }
+    .pricing-features li.disabled {
+      color: var(--text-light);
+    }
+    .pricing-features li.disabled i {
+      color: var(--text-light);
+    }
+    .pricing-features li.spacer {
+      visibility: hidden;
+    }
+    .pricing-cta {
+      width: 100%;
+      justify-content: center;
+    }
+    .pricing-card.featured .pricing-cta {
+      background: white;
+      color: var(--text-main);
+    }
+    .pricing-annual {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 12px;
+    }
+    .pricing-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .pricing-note i {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-primary);
+    }
+    @media (max-width: 900px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pricing-card.featured {
+        transform: none;
+        order: -1;
+      }
+    }
+
+    /* === Parents Section === */
+    .parents-section {
+      padding: 100px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+    .parents-content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .parents-intro {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .parents-points {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .parent-point {
+      display: flex;
+      gap: 16px;
+    }
+    .point-icon {
+      width: 44px; height: 44px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+    }
+    .point-icon i { width: 22px; height: 22px; }
+    .point-content h4 {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .point-content p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .parents-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .parent-quote-card {
+      background: linear-gradient(135deg, var(--accent-surface) 0%, #F0FAF8 100%);
+      border: 1px solid var(--accent-border);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 360px;
+    }
+    .quote-icon {
+      width: 40px; height: 40px;
+      background: var(--accent-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .quote-icon i { width: 20px; height: 20px; }
+    .parent-quote-card p {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .quote-attribution {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .quote-dash {
+      margin-right: 4px;
+    }
+    @media (max-width: 900px) {
+      .parents-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .parents-visual {
+        order: -1;
+      }
+    }
+
+    /* === CTA === */
+    .cta-section {
+      padding: 120px 0;
+      background: var(--bg-page);
+    }
+    .cta-card {
+      background: linear-gradient(135deg, var(--text-main) 0%, #1a1a1a 100%);
+      border-radius: 32px;
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--accent-primary) 0%, transparent 60%);
+      opacity: 0.15;
+      top: -200px;
+      left: -100px;
+    }
+    .cta-glow.two {
+      top: auto;
+      bottom: -200px;
+      left: auto;
+      right: -100px;
+    }
+    .cta-title {
+      font-size: 48px;
+      color: white;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .cta-text {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+    }
+    .btn-white {
+      background: white;
+      color: var(--text-main);
+    }
+    .btn-white:hover {
+      background: var(--bg-secondary);
+    }
+    .btn-ghost-white {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .btn-ghost-white:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* === Footer === */
+    .footer {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-logo .logo-mark {
+      width: 24px; height: 24px;
+      font-size: 10px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-main); }
+    .footer-copy {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 900px) {
+      .hero-title { font-size: 44px; }
+      .section-title { font-size: 36px; }
+      .feature-row { grid-template-columns: 1fr; gap: 40px; }
+      .feature-row.reverse { direction: ltr; }
+      .steps-grid { grid-template-columns: 1fr; gap: 40px; }
+      .step-connector { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-mark">S3</div>
+        Sesame3
+      </a>
+      <div class="nav-links">
+        <a href="#how">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-secondary">Log in</a>
+        <a href="#" class="btn btn-primary">Get Started Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <i data-lucide="sparkles"></i>
+        AI-Powered College Counseling
+      </div>
+      <h1 class="hero-title">
+        Your personal advisor for the <span class="highlight">college journey</span>
+      </h1>
+      <p class="hero-subtitle">
+        Get expert guidance, honest chance assessments, and a clear roadmap — all through a conversation with an AI that knows you.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">
+          <i data-lucide="message-circle"></i>
+          Start Chatting Free
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <i data-lucide="play-circle"></i>
+          See How It Works
+        </a>
+      </div>
+
+      <div class="hero-screenshot">
+        <div class="hero-screenshot-inner">
+          <iframe src="assets/hero-screenshot.html" loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- How It Works -->
+  <section class="how-section" id="how">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Three steps to clarity</h2>
+        <p class="section-subtitle">No forms to fill. Just have a conversation.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-connector"></div>
+          <h3 class="step-title">Tell your story</h3>
+          <p class="step-desc">Share your interests, experiences, and dreams. Our AI listens and builds a complete picture of who you are.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-connector"></div>
+          <h3 class="step-title">Get honest insights</h3>
+          <p class="step-desc">See your real chances at any school, understand where you're strong, and know exactly what to improve.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Follow your roadmap</h3>
+          <p class="step-desc">Get personalized tasks and deadlines. Focus on one thing at a time. Stay calm, stay on track.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section" id="features">
+    <div class="container">
+
+      <!-- Feature 1: AI Advisor -->
+      <div class="feature-row">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <h2 class="feature-title">An advisor who truly knows you</h2>
+          <p class="feature-desc">
+            Forget generic advice. Ask anything — from "Should I apply ED to Yale?" to "How do I write about my research?" — and get personalized answers based on your full profile.
+          </p>
+          <ul class="feature-list">
+            <li><i data-lucide="check"></i> Strategic guidance tailored to your strengths</li>
+            <li><i data-lucide="check"></i> Voice and text — chat however you're comfortable</li>
+            <li><i data-lucide="check"></i> Available 24/7, infinitely patient</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <iframe src="assets/feature-advisor.html" loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+
+      <!-- Feature 2: Chances -->
+      <div class="feature-row reverse">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <i data-lucide="target"></i>
+          </div>
+          <h2 class="feature-title">Know your real chances</h2>
+          <p class="feature-desc">
+            No guesswork, no sugar-coating. See how you compare to typical admits at each school, understand exactly where you're strong or falling short, and get actionable advice on how to improve.
+          </p>
+          <ul class="feature-list">
+            <li><i data-lucide="check"></i> Factor-by-factor breakdown against admits</li>
+            <li><i data-lucide="check"></i> Clear reach, target, and safety tiers</li>
+            <li><i data-lucide="check"></i> Personalized recommendations to close gaps</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <iframe src="assets/feature-chances.html" loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+
+      <!-- Feature 3: Schools -->
+      <div class="feature-row">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <i data-lucide="school"></i>
+          </div>
+          <h2 class="feature-title">Build a balanced list</h2>
+          <p class="feature-desc">
+            Stop obsessing over one dream school. Build a smart, balanced list with reaches, targets, and safeties — and track every application from start to finish.
+          </p>
+          <ul class="feature-list">
+            <li><i data-lucide="check"></i> Visual balance of reach/target/safety schools</li>
+            <li><i data-lucide="check"></i> AI-suggested schools based on your fit</li>
+            <li><i data-lucide="check"></i> Application status tracking</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <iframe src="assets/feature-schools.html" loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+
+      <!-- Feature 4: Roadmap -->
+      <div class="feature-row reverse">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <i data-lucide="map"></i>
+          </div>
+          <h2 class="feature-title">One thing at a time</h2>
+          <p class="feature-desc">
+            College apps are overwhelming. We break it down into clear goals, simple tasks, and a timeline that keeps you focused — not frantic.
+          </p>
+          <ul class="feature-list">
+            <li><i data-lucide="check"></i> Personalized goals based on your deadlines</li>
+            <li><i data-lucide="check"></i> Daily focus: just tackle the next thing</li>
+            <li><i data-lucide="check"></i> AI tips to help you move faster</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <iframe src="assets/feature-roadmap.html" loading="lazy" scrolling="no"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section class="problem-section">
+    <div class="container">
+      <div class="problem-stats">
+        <div class="stat-item">
+          <div class="stat-number">4M+</div>
+          <div class="stat-text">students apply to college each year</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">500:1</div>
+          <div class="stat-text">average student-to-counselor ratio at public schools</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">$200/hr</div>
+          <div class="stat-text">typical private counselor rate</div>
+        </div>
+      </div>
+      <div class="problem-quote">
+        <p>"The college admissions process has become so complex that many students, especially those without resources, are left navigating it alone."</p>
+        <div class="quote-author">
+          — <strong>The New York Times</strong>, on the college counseling gap
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who It's For -->
+  <section class="audience-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Who It's For</div>
+        <h2 class="section-title">Built for students like you</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-emoji">🎯</div>
+          <h3>The Overwhelmed</h3>
+          <p>You know college matters, but every Google search makes it worse. You need clarity, not more noise.</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-emoji">🌱</div>
+          <h3>The Early Starter</h3>
+          <p>You're in 9th or 10th grade and want to get ahead — without burning out before applications even begin.</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-emoji">⚡</div>
+          <h3>The Catch-Up Kid</h3>
+          <p>Junior year hit fast. You need to figure out your story, your list, and your plan — like, now.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">When to Start</div>
+        <h2 class="section-title">The earlier, the calmer</h2>
+        <p class="section-subtitle">No matter where you are, there's a path forward.</p>
+      </div>
+      <div class="grade-timeline">
+        <div class="grade-item">
+          <div class="grade-badge">9th–10th</div>
+          <h3>Explore & Build</h3>
+          <p>Discover your interests, start meaningful activities, build your profile foundation.</p>
+          <div class="grade-tag ideal">Ideal start</div>
+        </div>
+        <div class="grade-item">
+          <div class="grade-badge">11th</div>
+          <h3>Focus & Plan</h3>
+          <p>Lock in your school list, prep for tests, map out your application timeline.</p>
+          <div class="grade-tag peak">Peak planning</div>
+        </div>
+        <div class="grade-item">
+          <div class="grade-badge">12th</div>
+          <h3>Execute & Apply</h3>
+          <p>Write essays, submit applications, track deadlines, and stay sane.</p>
+          <div class="grade-tag crunch">Crunch time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Why Sesame3</div>
+        <h2 class="section-title">How we compare</h2>
+      </div>
+      <div class="comparison-table">
+        <div class="comparison-header">
+          <div class="comparison-cell empty"></div>
+          <div class="comparison-cell">School Counselor</div>
+          <div class="comparison-cell">Private Counselor</div>
+          <div class="comparison-cell highlight">Sesame3</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell label">Availability</div>
+          <div class="comparison-cell">15 min/year avg</div>
+          <div class="comparison-cell">Scheduled sessions</div>
+          <div class="comparison-cell highlight">24/7, anytime</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell label">Personalization</div>
+          <div class="comparison-cell">Limited (500 students)</div>
+          <div class="comparison-cell">High</div>
+          <div class="comparison-cell highlight">Deep (knows everything)</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell label">Cost</div>
+          <div class="comparison-cell">Free</div>
+          <div class="comparison-cell">$2,000–$10,000+</div>
+          <div class="comparison-cell highlight">Free to start</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell label">Chance estimates</div>
+          <div class="comparison-cell"><i data-lucide="x" class="icon-no"></i></div>
+          <div class="comparison-cell"><i data-lucide="check" class="icon-yes"></i></div>
+          <div class="comparison-cell highlight"><i data-lucide="check" class="icon-yes"></i></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell label">Task tracking</div>
+          <div class="comparison-cell"><i data-lucide="x" class="icon-no"></i></div>
+          <div class="comparison-cell">Sometimes</div>
+          <div class="comparison-cell highlight"><i data-lucide="check" class="icon-yes"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section class="trust-section">
+    <div class="container">
+      <div class="trust-content">
+        <div class="trust-icon">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div class="trust-text">
+          <h3>Your data stays yours</h3>
+          <p>We never share or sell your information. Your profile, conversations, and essays are private — always. We're here to help you, not monetize you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="included-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Everything you need, in one place</h2>
+      </div>
+      <div class="included-grid">
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="message-circle"></i></div>
+          <div class="included-label">AI Advisor</div>
+          <div class="included-desc">24/7 guidance</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="target"></i></div>
+          <div class="included-label">Chances</div>
+          <div class="included-desc">Real odds</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="school"></i></div>
+          <div class="included-label">School List</div>
+          <div class="included-desc">Balanced picks</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="map"></i></div>
+          <div class="included-label">Roadmap</div>
+          <div class="included-desc">Clear tasks</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="user"></i></div>
+          <div class="included-label">Profile</div>
+          <div class="included-desc">Your story</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="mic"></i></div>
+          <div class="included-label">Voice Chat</div>
+          <div class="included-desc">Talk naturally</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="smartphone"></i></div>
+          <div class="included-label">Mobile</div>
+          <div class="included-desc">Use anywhere</div>
+        </div>
+        <div class="included-item">
+          <div class="included-icon"><i data-lucide="lock"></i></div>
+          <div class="included-label">Private</div>
+          <div class="included-desc">Your data, yours</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Questions</div>
+        <h2 class="section-title">Frequently asked</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>Is this replacing my school counselor?</h3>
+          <p>No — think of us as an always-available supplement. Your school counselor knows your school context; we know the broader admissions landscape and can give you unlimited personalized attention.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How is this different from ChatGPT?</h3>
+          <p>ChatGPT doesn't know you. Sesame3 builds a complete profile of your academics, activities, goals, and preferences — and every answer is tailored to YOUR situation, not generic advice.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What grade should I start?</h3>
+          <p>The earlier the better — 9th and 10th graders can build a strong foundation. But even if you're a junior or senior, we'll help you make the most of the time you have.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is my data safe?</h3>
+          <p>Absolutely. We never share or sell your information. Your essays, conversations, and profile are private and encrypted. We're here to help you, not monetize your data.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How accurate are the chance estimates?</h3>
+          <p>Our estimates are based on publicly available admission data and common admit profiles. They're directional guidance — not guarantees — designed to help you build a realistic, balanced school list.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is it really free?</h3>
+          <p>Yes, you can get started completely free. We'll offer optional premium features in the future, but the core experience — advisor, chances, school list, roadmap — is free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title">Start free, upgrade when ready</h2>
+        <p class="section-subtitle">No credit card required. Use the free tier forever.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Free Tier -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Free</h3>
+            <div class="pricing-price">
+              <span class="price-amount">$0</span>
+              <span class="price-period">forever</span>
+            </div>
+            <p class="pricing-desc">For students exploring their options</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check"></i> 20 AI messages per week</li>
+            <li><i data-lucide="check"></i> Profile building</li>
+            <li><i data-lucide="check"></i> School discovery</li>
+            <li><i data-lucide="check"></i> Up to 3 schools on your list</li>
+            <li><i data-lucide="check"></i> Basic chances (Reach/Target/Safety)</li>
+            <li><i data-lucide="check"></i> Basic roadmap & tasks</li>
+            <li class="disabled"><i data-lucide="x"></i> Voice chat</li>
+            <li class="disabled"><i data-lucide="x"></i> Essay review</li>
+            <li class="disabled"><i data-lucide="x"></i> Shared access</li>
+          </ul>
+          <a href="#" class="btn btn-secondary pricing-cta">Get Started Free</a>
+        </div>
+
+        <!-- Premium Tier -->
+        <div class="pricing-card featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3 class="pricing-name">Premium</h3>
+            <div class="pricing-price">
+              <span class="price-amount">$19</span>
+              <span class="price-period">/month</span>
+            </div>
+            <p class="pricing-desc">For serious applicants ready to go all-in</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check"></i> <strong>Unlimited</strong> AI messages</li>
+            <li><i data-lucide="check"></i> Profile building</li>
+            <li><i data-lucide="check"></i> School discovery</li>
+            <li><i data-lucide="check"></i> <strong>Unlimited</strong> schools on your list</li>
+            <li><i data-lucide="check"></i> <strong>Detailed chances</strong> with % breakdown</li>
+            <li><i data-lucide="check"></i> <strong>Smart roadmap</strong> with AI suggestions</li>
+            <li><i data-lucide="check"></i> Voice chat</li>
+            <li><i data-lucide="check"></i> Essay review & feedback</li>
+            <li><i data-lucide="check"></i> Share with parents & counselors</li>
+          </ul>
+          <a href="#" class="btn btn-primary pricing-cta">Start Premium</a>
+          <p class="pricing-annual">Or $149/year (save 2 months)</p>
+        </div>
+
+        <!-- Senior Pass -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Senior Year Pass</h3>
+            <div class="pricing-price">
+              <span class="price-amount">$99</span>
+              <span class="price-period">one-time</span>
+            </div>
+            <p class="pricing-desc">For 12th graders in crunch mode</p>
+          </div>
+          <ul class="pricing-features">
+            <li><i data-lucide="check"></i> Everything in Premium</li>
+            <li><i data-lucide="check"></i> Full access for senior year</li>
+            <li><i data-lucide="check"></i> No monthly payments</li>
+            <li><i data-lucide="check"></i> Application season covered</li>
+            <li class="spacer"></li>
+            <li class="spacer"></li>
+            <li class="spacer"></li>
+            <li class="spacer"></li>
+            <li class="spacer"></li>
+          </ul>
+          <a href="#" class="btn btn-secondary pricing-cta">Get Senior Pass</a>
+        </div>
+      </div>
+
+      <div class="pricing-note">
+        <i data-lucide="info"></i>
+        <p>Not sure yet? Start free and upgrade anytime. Your data carries over.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Parents -->
+  <section class="parents-section">
+    <div class="container">
+      <div class="parents-content">
+        <div class="parents-text">
+          <div class="section-label">For Parents</div>
+          <h2 class="section-title">We get it — this matters.</h2>
+          <p class="parents-intro">
+            Your child's college journey is stressful for the whole family. You want to help, but you also don't want to hover. Here's how Sesame3 helps you both.
+          </p>
+          <div class="parents-points">
+            <div class="parent-point">
+              <div class="point-icon"><i data-lucide="eye"></i></div>
+              <div class="point-content">
+                <h4>Stay informed, not intrusive</h4>
+                <p>Your child drives the process. You can check in on progress without micromanaging every detail.</p>
+              </div>
+            </div>
+            <div class="parent-point">
+              <div class="point-icon"><i data-lucide="wallet"></i></div>
+              <div class="point-content">
+                <h4>Expert guidance without the $10K price tag</h4>
+                <p>Private counselors charge thousands. Sesame3 provides personalized, strategic advice at a fraction of the cost.</p>
+              </div>
+            </div>
+            <div class="parent-point">
+              <div class="point-icon"><i data-lucide="heart"></i></div>
+              <div class="point-content">
+                <h4>Reduce stress for everyone</h4>
+                <p>When your child has a clear plan and 24/7 support, there's less anxiety at the dinner table.</p>
+              </div>
+            </div>
+            <div class="parent-point">
+              <div class="point-icon"><i data-lucide="shield"></i></div>
+              <div class="point-content">
+                <h4>Safe and private</h4>
+                <p>We never share or sell data. Your child's essays, grades, and conversations stay completely private.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="parents-visual">
+          <div class="parent-quote-card">
+            <div class="quote-icon"><i data-lucide="quote"></i></div>
+            <p>"I used to lie awake worrying if we were doing enough. Now my daughter has a plan, and I can actually sleep."</p>
+            <div class="quote-attribution">
+              <span class="quote-dash">—</span> What we hope you'll say
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-glow"></div>
+        <div class="cta-glow two"></div>
+        <h2 class="cta-title">Ready to start your journey?</h2>
+        <p class="cta-text">
+          Join students who are navigating college admissions with clarity and calm. It's free to get started.
+        </p>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-white">
+            <i data-lucide="arrow-right"></i>
+            Get Started Free
+          </a>
+          <a href="#" class="btn btn-ghost-white">Talk to Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <div class="logo-mark">S3</div>
+        Sesame3
+      </div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-copy">
+        © 2025 Sesame3
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

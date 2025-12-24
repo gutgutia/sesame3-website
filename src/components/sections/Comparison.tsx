@@ -53,19 +53,50 @@ export function Comparison() {
           </h2>
         </div>
 
-        {/* Table - horizontally scrollable on mobile */}
-        <div className="overflow-x-auto -mx-4 px-4">
-          <div className="bg-white rounded-2xl overflow-hidden shadow-sm min-w-[600px]">
+        {/* Mobile: 2-column comparison (Private vs Sesame3) */}
+        <div className="md:hidden">
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
             {/* Header Row */}
-            <div className="grid grid-cols-4 bg-[var(--bg-secondary)] border-b border-[var(--border)]">
-              <div className="p-4 md:p-5"></div>
-              <div className="p-4 md:p-5 text-center font-semibold text-[var(--text-main)] text-sm md:text-base">
-                School Counselor
-              </div>
-              <div className="p-4 md:p-5 text-center font-semibold text-[var(--text-main)] text-sm md:text-base">
+            <div className="grid grid-cols-3 bg-[var(--bg-secondary)] border-b border-[var(--border)]">
+              <div className="p-4"></div>
+              <div className="p-4 text-center font-semibold text-[var(--text-main)] text-sm">
                 Private Counselor
               </div>
-              <div className="p-4 md:p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] text-sm md:text-base">
+              <div className="p-4 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] text-sm">
+                Sesame3
+              </div>
+            </div>
+
+            {/* Data Rows */}
+            {rows.map((row, i) => (
+              <div key={i} className="grid grid-cols-3 border-b border-[var(--border)] last:border-b-0">
+                <div className="p-4 font-medium text-[var(--text-main)] bg-[var(--bg-secondary)] text-sm">
+                  {row.label}
+                </div>
+                <div className="p-4 text-center text-[var(--text-muted)] flex items-center justify-center text-sm">
+                  {renderCell(row.private)}
+                </div>
+                <div className="p-4 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] flex items-center justify-center text-sm">
+                  {renderCell(row.sesame)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: Full 4-column comparison */}
+        <div className="hidden md:block">
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
+            {/* Header Row */}
+            <div className="grid grid-cols-4 bg-[var(--bg-secondary)] border-b border-[var(--border)]">
+              <div className="p-5"></div>
+              <div className="p-5 text-center font-semibold text-[var(--text-main)]">
+                School Counselor
+              </div>
+              <div className="p-5 text-center font-semibold text-[var(--text-main)]">
+                Private Counselor
+              </div>
+              <div className="p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)]">
                 Sesame3
               </div>
             </div>
@@ -73,27 +104,22 @@ export function Comparison() {
             {/* Data Rows */}
             {rows.map((row, i) => (
               <div key={i} className="grid grid-cols-4 border-b border-[var(--border)] last:border-b-0">
-                <div className="p-4 md:p-5 font-medium text-[var(--text-main)] bg-[var(--bg-secondary)] text-sm md:text-base">
+                <div className="p-5 font-medium text-[var(--text-main)] bg-[var(--bg-secondary)]">
                   {row.label}
                 </div>
-                <div className="p-4 md:p-5 text-center text-[var(--text-muted)] flex items-center justify-center text-sm md:text-base">
+                <div className="p-5 text-center text-[var(--text-muted)] flex items-center justify-center">
                   {renderCell(row.school)}
                 </div>
-                <div className="p-4 md:p-5 text-center text-[var(--text-muted)] flex items-center justify-center text-sm md:text-base">
+                <div className="p-5 text-center text-[var(--text-muted)] flex items-center justify-center">
                   {renderCell(row.private)}
                 </div>
-                <div className="p-4 md:p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] flex items-center justify-center text-sm md:text-base">
+                <div className="p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] flex items-center justify-center">
                   {renderCell(row.sesame)}
                 </div>
               </div>
             ))}
           </div>
         </div>
-        
-        {/* Scroll hint for mobile */}
-        <p className="text-center text-xs text-[var(--text-light)] mt-4 md:hidden">
-          ← Swipe to see all columns →
-        </p>
       </div>
     </section>
   );

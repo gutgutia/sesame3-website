@@ -41,52 +41,59 @@ export function Comparison() {
   };
 
   return (
-    <section className="py-24 bg-[var(--bg-page)]">
-      <div className="container">
+    <section className="py-16 md:py-24 bg-[var(--bg-page)]">
+      <div className="container px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-primary)] mb-4">
             Why Sesame3
           </p>
-          <h2 className="font-['Satoshi'] text-4xl font-bold">
+          <h2 className="font-['Satoshi'] text-3xl md:text-4xl font-bold">
             How we compare
           </h2>
         </div>
 
-        {/* Table */}
-        <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
-          {/* Header Row */}
-          <div className="grid grid-cols-4 bg-[var(--bg-secondary)] border-b border-[var(--border)]">
-            <div className="p-5"></div>
-            <div className="p-5 text-center font-semibold text-[var(--text-main)]">
-              School Counselor
+        {/* Table - horizontally scrollable on mobile */}
+        <div className="overflow-x-auto -mx-4 px-4">
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm min-w-[600px]">
+            {/* Header Row */}
+            <div className="grid grid-cols-4 bg-[var(--bg-secondary)] border-b border-[var(--border)]">
+              <div className="p-4 md:p-5"></div>
+              <div className="p-4 md:p-5 text-center font-semibold text-[var(--text-main)] text-sm md:text-base">
+                School Counselor
+              </div>
+              <div className="p-4 md:p-5 text-center font-semibold text-[var(--text-main)] text-sm md:text-base">
+                Private Counselor
+              </div>
+              <div className="p-4 md:p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] text-sm md:text-base">
+                Sesame3
+              </div>
             </div>
-            <div className="p-5 text-center font-semibold text-[var(--text-main)]">
-              Private Counselor
-            </div>
-            <div className="p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)]">
-              Sesame3
-            </div>
-          </div>
 
-          {/* Data Rows */}
-          {rows.map((row, i) => (
-            <div key={i} className="grid grid-cols-4 border-b border-[var(--border)] last:border-b-0">
-              <div className="p-5 font-medium text-[var(--text-main)] bg-[var(--bg-secondary)]">
-                {row.label}
+            {/* Data Rows */}
+            {rows.map((row, i) => (
+              <div key={i} className="grid grid-cols-4 border-b border-[var(--border)] last:border-b-0">
+                <div className="p-4 md:p-5 font-medium text-[var(--text-main)] bg-[var(--bg-secondary)] text-sm md:text-base">
+                  {row.label}
+                </div>
+                <div className="p-4 md:p-5 text-center text-[var(--text-muted)] flex items-center justify-center text-sm md:text-base">
+                  {renderCell(row.school)}
+                </div>
+                <div className="p-4 md:p-5 text-center text-[var(--text-muted)] flex items-center justify-center text-sm md:text-base">
+                  {renderCell(row.private)}
+                </div>
+                <div className="p-4 md:p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] flex items-center justify-center text-sm md:text-base">
+                  {renderCell(row.sesame)}
+                </div>
               </div>
-              <div className="p-5 text-center text-[var(--text-muted)] flex items-center justify-center">
-                {renderCell(row.school)}
-              </div>
-              <div className="p-5 text-center text-[var(--text-muted)] flex items-center justify-center">
-                {renderCell(row.private)}
-              </div>
-              <div className="p-5 text-center font-semibold text-[var(--accent-primary)] bg-[var(--accent-surface)] flex items-center justify-center">
-                {renderCell(row.sesame)}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        
+        {/* Scroll hint for mobile */}
+        <p className="text-center text-xs text-[var(--text-light)] mt-4 md:hidden">
+          ← Swipe to see all columns →
+        </p>
       </div>
     </section>
   );

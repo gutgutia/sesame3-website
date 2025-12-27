@@ -30,10 +30,10 @@ export function Hero() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    
+
     setLoading(true);
     try {
-      const response = await fetch("https://formspree.io/f/mojazpwv", {
+      const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      padding: 24px;
+      width: 520px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header-icon {
+      width: 40px;
+      height: 40px;
+      background: #e8f5f3;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .header-text h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .header-text p {
+      font-size: 13px;
+      color: #12756A;
+    }
+    .stats {
+      display: flex;
+      gap: 16px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 18px;
+      font-weight: 700;
+      color: #12756A;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .content {
+      padding: 20px 24px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section:last-child {
+      margin-bottom: 0;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .section-icon {
+      font-size: 14px;
+    }
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: #fafafa;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    .item:last-child {
+      margin-bottom: 0;
+    }
+    .item-icon {
+      width: 36px;
+      height: 36px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .item-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+    .item-subtitle {
+      font-size: 12px;
+      color: #666;
+    }
+    .item-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background: #e8f5f3;
+      color: #12756A;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 4px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .item-tag.gold {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .item-tag.purple {
+      background: #ede9fe;
+      color: #6b21a8;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-icon">📋</div>
+        <div class="header-text">
+          <h2>Your Profile</h2>
+          <p>Everything in one place</p>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">8</div>
+          <div class="stat-label">Activities</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Awards</div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">🏆</span>
+          <span class="section-title">Awards & Honors</span>
+        </div>
+        <div class="item">
+          <div class="item-icon">🥇</div>
+          <div class="item-content">
+            <div class="item-title">USAMO Qualifier</div>
+            <div class="item-subtitle">Top 250 nationally · Junior year</div>
+          </div>
+          <div class="item-tag gold">National</div>
+        </div>
+        <div class="item">
+          <div class="item-icon">🔬</div>
+          <div class="item-content">
+            <div class="item-title">Science Olympiad — 2nd Place</div>
+            <div class="item-subtitle">State championship · Chemistry</div>
+          </div>
+          <div class="item-tag">State</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">⭐</span>
+          <span class="section-title">Activities & Leadership</span>
+        </div>
+        <div class="item">
+          <div class="item-icon">🤖</div>
+          <div class="item-content">
+            <div class="item-title">Robotics Club President</div>
+            <div class="item-subtitle">4 years · 15 hrs/week</div>
+          </div>
+          <div class="item-tag purple">Leadership</div>
+        </div>
+        <div class="item">
+          <div class="item-icon">📰</div>
+          <div class="item-content">
+            <div class="item-title">School Newspaper Editor</div>
+            <div class="item-subtitle">3 years · Op-ed section</div>
+          </div>
+          <div class="item-tag purple">Leadership</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import { Sparkles, Target, School, Map, Check } from "lucide-react";
+import { Sparkles, Target, School, Check, FolderOpen, Calendar } from "lucide-react";
 
 const features = [
   {
@@ -36,16 +36,27 @@ const features = [
     screenshot: "/assets/feature-schools.png",
   },
   {
-    icon: Map,
-    title: "One thing at a time",
-    description: "College apps are overwhelming. We break it down into clear goals, simple tasks, and a timeline that keeps you focused — not frantic.",
+    icon: FolderOpen,
+    title: "Everything in one place",
+    description: "No more scattered Google Docs and forgotten achievements. Your awards, extracurriculars, test scores, leadership roles, and dream schools — all organized and ready when you need them.",
     points: [
-      "Personalized goals based on your deadlines",
-      "Daily focus: just tackle the next thing",
-      "AI tips to help you move faster",
+      "Track activities, awards, and achievements",
+      "Store test scores and academic records",
+      "Build your story over time, not the night before",
+    ],
+    screenshot: "/assets/feature-profile.png",
+    reverse: true,
+  },
+  {
+    icon: Calendar,
+    title: "Never miss a deadline",
+    description: "Early Decision, scholarship applications, test registrations — there's a lot to track. See every important date in one timeline, and we'll nudge you before it's too late.",
+    points: [
+      "All deadlines in one clear timeline view",
+      "Smart reminders before due dates",
+      "Personalized tasks based on your school list",
     ],
     screenshot: "/assets/feature-roadmap.png",
-    reverse: true,
   },
 ];
 

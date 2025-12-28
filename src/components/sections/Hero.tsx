@@ -54,7 +54,7 @@ export function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--accent-surface)] border border-[var(--accent-border)] rounded-full text-sm font-semibold text-[var(--accent-primary)] mb-6 md:mb-7">
           <Sparkles className="w-3.5 h-3.5" />
-          Coming Soon
+          Launching January 2026
         </div>
 
         {/* Title */}

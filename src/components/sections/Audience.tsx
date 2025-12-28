@@ -12,7 +12,7 @@ const audiences = [
   {
     emoji: "⚡",
     title: "The Catch-Up Kid",
-    description: "Junior year hit fast. You need to figure out your story, your list, and your plan — like, now.",
+    description: "Junior year hit fast. You need to figure out your story, your list, and your plan — like, now. We'll help you organize what you've already done, identify what makes you unique, and build a realistic timeline to get it all done.",
   },
 ];
 

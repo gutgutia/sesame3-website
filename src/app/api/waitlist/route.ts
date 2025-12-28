@@ -20,7 +20,7 @@ function getWaitlistEmailHTML(email: string): string {
           <!-- Logo -->
           <tr>
             <td align="center" style="padding-bottom: 32px;">
-              <img src="https://sesame3.com/assets/logo.png" alt="Sesame3" width="140" style="display: block;" />
+              <img src="https://sesame3.com/assets/logo-full.png" alt="Sesame3" width="140" style="display: block;" />
             </td>
           </tr>
 
@@ -126,11 +126,16 @@ function getWaitlistEmailHTML(email: string): string {
           <!-- Footer -->
           <tr>
             <td style="padding: 32px 20px; text-align: center;">
-              <p style="margin: 0 0 8px; font-size: 14px; color: #6b7280;">
+              <p style="margin: 0 0 12px; font-size: 14px; color: #6b7280;">
                 You received this email because you signed up for the Sesame3 waitlist.
               </p>
-              <p style="margin: 0; font-size: 14px; color: #9ca3af;">
+              <p style="margin: 0 0 12px; font-size: 14px; color: #9ca3af;">
                 © ${new Date().getFullYear()} Sesame3. All rights reserved.
+              </p>
+              <p style="margin: 0; font-size: 13px; color: #9ca3af;">
+                <a href="https://sesame3.com/terms" style="color: #6b7280; text-decoration: underline;">Terms of Service</a>
+                &nbsp;&nbsp;·&nbsp;&nbsp;
+                <a href="https://sesame3.com/privacy" style="color: #6b7280; text-decoration: underline;">Privacy Policy</a>
               </p>
             </td>
           </tr>
@@ -172,6 +177,9 @@ Visit us: https://sesame3.com
 ---
 You received this email because you signed up for the Sesame3 waitlist.
 © ${new Date().getFullYear()} Sesame3. All rights reserved.
+
+Terms of Service: https://sesame3.com/terms
+Privacy Policy: https://sesame3.com/privacy
   `.trim();
 }
 

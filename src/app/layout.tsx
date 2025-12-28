@@ -30,11 +30,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/assets/favicon-32.png", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
     apple: "/assets/apple-touch-icon-180.png",
   },
   manifest: "/site.webmanifest",
@@ -49,16 +46,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/assets/apple-touch-icon-180.png" />
-        <link 
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" 
-          rel="stylesheet" 
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
+          rel="stylesheet"
         />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" 
-          rel="stylesheet" 
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet"
         />
       </head>
       <body>
